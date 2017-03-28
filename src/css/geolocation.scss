@@ -1,0 +1,61 @@
+$geolocation-margin: 0 0 14px 0;
+$geolocation-refine-box-margin: 24px 0;
+$geolocation-refine-box-bg-color: grey; // TODO RCH : replace by "$mywort-sushi" in mywort project
+$geolocation-refine-box-text-color: white;
+
+// Media queries
+$small-screen: 768px !default;
+$small: "only screen and (min-width: #{$small-screen})" !default;
+
+
+.geolocation {
+  margin: $geolocation-margin;
+
+  input[type="text"] {
+    margin-bottom: 0;
+  }
+
+  .Select {
+    margin-bottom: 0;
+  }
+
+  @media #{$small} {
+    .Select {
+      margin: auto;
+      width: 50%;
+    }
+  }
+}
+
+.geolocation__refine-box.fixed-tooltip {
+  display: inline-block;
+  position: relative;
+  margin: $geolocation-refine-box-margin;
+  width: 100%;
+
+  .fixed-tooltip-inner {
+    padding: 16px;
+    max-width: 100%;
+    text-align: left;
+    border-radius: 0;
+    background-color: $geolocation-refine-box-bg-color;
+  }
+
+  .fixed-tooltip-arrow {
+    position: absolute;
+    top: -29px;
+    left: 50%;
+    width: 0;
+    height: 0;
+    margin-left: -9px;
+    border: 18px solid transparent;
+    border-bottom-color: $geolocation-refine-box-bg-color;
+  }
+}
+
+.geolocation__refine-text {
+  // @include font-set-roboto-light(14px); // TODO RCH : add this in mywort project
+
+  margin-bottom: 12px;
+  color: $geolocation-refine-box-text-color;
+}

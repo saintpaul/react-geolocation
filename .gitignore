@@ -1,0 +1,7 @@
+.*
+*.iml
+!.gitignore
+/build/
+/node_modules/
+/dist/index.html
+/demo/build/
