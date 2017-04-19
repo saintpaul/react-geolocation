@@ -127,7 +127,13 @@ class Geolocation extends React.Component {
             this.autocompleteRef.value = this.state.userInputAddress; // Force value to last value to not display wrong locality
     };
 
-    _getUserInputAddressFromProps = (props) => _get("value.userInputAddress")(props) || _get("value.userInputAddress")(this.state) || "";
+    _getUserInputAddressFromProps = (props) => {
+        let userInputAddress = _get("value.userInputAddress")(props) || _get("value.userInputAddress")(this.state);
+        if(userInputAddress && userInputAddress !== "")
+            return userInputAddress;
+        else
+            return _get("value.gmapsAddress")(this.props) || "";
+    };
     _getAddressFromPlace = () => _get("place.formatted_address")(this.state) || _get("value.gmapsAddress")(this.props)  || "";
     _getGmapsURL = () => _get("place.url")(this.state) || _get("value.gmapsURL")(this.props) || "";
     _getChooseCityText = () => this.props.chooseCityText || Config.CHOOSE_CITY_TEXT;
