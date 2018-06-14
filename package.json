@@ -1,9 +1,10 @@
 {
   "name": "react-geolocation",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "ReactJs Geolocation component",
   "main": "./lib/js/index.js",
   "scripts": {
+    "start": "gulp",
     "prebuild": "npm i",
     "build": "./build.sh",
     "prerelease": "./build.sh",
@@ -23,9 +24,9 @@
     "google-maps-api": "^2.0.1"
   },
   "peerDependencies": {
-    "react": "0.14.x || 15.x",
-    "react-dom": "0.14.x || 15.x",
-    "react-select": "1.0.0-rc.1",
+    "react": "0.16.x",
+    "react-dom": "0.16.x",
+    "react-select": "1.0.0",
     "react-bootstrap": "0.30.x",
     "lodash": "4.x"
   },
@@ -58,15 +59,14 @@
     "gulp-streamify": "0.0.4",
     "gulp-uglify": "~1.1.0",
     "gulp-util": "~3.0.0",
-    "jquery": "^3.2.1",
     "lodash": "4.x",
     "moment": "2.x",
-    "react": "15.x",
+    "prop-types": "15.6.1",
+    "react": "16.x",
     "react-bootstrap": "~0.30.1",
-    "react-commons": "git://github.com/saintpaul/react-commons",
-    "react-dom": "15.x",
-    "react-select": "1.0.0-rc.1",
-    "reflux": "^0.4.0",
+    "react-commons": "git://github.com/saintpaul/react-commons#v4.3.0",
+    "react-dom": "16.x",
+    "react-select": "1.0.0",
     "run-sequence": "~0.3.5",
     "vinyl-source-stream": "~0.1.1",
     "watchify": "~2.3.0"

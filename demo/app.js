@@ -13,7 +13,7 @@ class Demo extends React.Component {
         super(props);
 
         this.state = {
-            locality: ""
+            locality: undefined
         }
     }
 

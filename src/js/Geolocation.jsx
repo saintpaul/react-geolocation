@@ -1,13 +1,14 @@
-const React = require('react');
-const Select  = require('react-select');
+import React from 'react';
+import PropTypes from 'prop-types';
+import Select from 'react-select';
 // TODO RCH : remove react-bootstrap ! (in package.json as well)
-const Tooltip = require("react-bootstrap/lib/Tooltip");
-const _head = require("lodash/fp/head");
-const _get = require("lodash/fp/get");
-const _find = require("lodash/fp/find");
-const _flow = require("lodash/fp/flow");
+import Tooltip from "react-bootstrap/lib/Tooltip";
+import _head from "lodash/fp/head";
+import _get from "lodash/fp/get";
+import _find from "lodash/fp/find";
+import _flow from "lodash/fp/flow";
 
-const Config = require("./Configuration");
+import Config from "./Configuration";
 
 
 class Geolocation extends React.Component {
@@ -41,7 +42,7 @@ class Geolocation extends React.Component {
             this.autocomplete = new maps.places.Autocomplete(this.autocompleteRef, options);
             this.autocomplete.addListener('place_changed', this.onChangeAutoComplete);
         });
-    };
+    }
 
     componentWillReceiveProps(nextProps) {
         // Update state only if new value is empty or is different from current one
@@ -183,17 +184,17 @@ class Geolocation extends React.Component {
     );
 }
 
-Geolocation.PropTypes = {
-    value : React.PropTypes.object,
-    valueRenderer : React.PropTypes.func,
-    optionRenderer : React.PropTypes.func,
-    onChange : React.PropTypes.func,
-    placeholder: React.PropTypes.string,
-    chooseCityText: React.PropTypes.string,
-    disabled: React.PropTypes.bool,
-    className: React.PropTypes.string,
-    language: React.PropTypes.string,
-    search: React.PropTypes.func
+Geolocation.propTypes = {
+    value : PropTypes.object,
+    valueRenderer : PropTypes.func,
+    optionRenderer : PropTypes.func,
+    onChange : PropTypes.func,
+    placeholder: PropTypes.string,
+    chooseCityText: PropTypes.string,
+    disabled: PropTypes.bool,
+    className: PropTypes.string,
+    language: PropTypes.string,
+    search: PropTypes.func
 };
 
 Geolocation.defaultProps = {
