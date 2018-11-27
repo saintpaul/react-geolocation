@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.2.0
+- Fix version of 'event-stream' to 3.3.4 to avoid security issues
+
 ## 1.1.0
 - Support for React 16
 - Use prop-types module instead of React.propTypes
