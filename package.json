@@ -1,6 +1,6 @@
 {
   "name": "react-geolocation",
-  "version": "3.3.4",
+  "version": "1.2.0",
   "description": "ReactJs Geolocation component",
   "main": "./lib/js/index.js",
   "scripts": {
