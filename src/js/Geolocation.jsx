@@ -60,7 +60,8 @@ class Geolocation extends React.Component {
             userInputAddress: props.value ? props.value.userInputAddress : "", // User's input
             nearestLocalities: [],
             selectedLocality: undefined,
-            hideChooseSelect: false
+            hideChooseSelect: false,
+            showFallbackText: false
         }
     };
 
@@ -89,13 +90,17 @@ class Geolocation extends React.Component {
 
     onChangeInput = () => {
         if(this.state.selectedLocality)
-            this.setState({ hideChooseSelect: true });
+            this.setState({
+                hideChooseSelect: true,
+                showFallbackText: false
+            });
     };
 
     onChangeAutoComplete = () => {
         if(!this.autocomplete)
             return;
 
+        let showFallbackText = false;
         let place = this.autocomplete.getPlace();
         if(place !== undefined && place.geometry !== undefined) {
             let userInput = this.autocompleteRef.value;
@@ -105,9 +110,27 @@ class Geolocation extends React.Component {
                 _get("short_name")
             )(place.address_components);
 
+            // If user has selected an entry which is not giving any valid locality (ex: 'Luxemburg'),
+            // Fallback to Luxemburg City
+            if(!placeName) {
+                showFallbackText = true;
+                placeName = "Luxemburg";
+                place = {
+                    place: {
+                        formatted_address: "Luxemburg",
+                        url: "https://maps.google.com/?q=Luxemburg&ftid=0x479548cd9df32c57:0x400d1d6d1056d10"
+                    }
+                };
+                placeLocation = {
+                    lat: () => 49.61162100000001,
+                    lng: () => 6.131934600000022
+                };
+            }
+
             this.setState({
                 userInputAddress: userInput,
-                place: place
+                place: place,
+                showFallbackText: showFallbackText
             });
 
             this.props.search(placeName, placeLocation.lat(), placeLocation.lng(), this.onSearch);
@@ -138,6 +161,7 @@ class Geolocation extends React.Component {
     _getAddressFromPlace = () => _get("place.formatted_address")(this.state) || _get("value.gmapsAddress")(this.props)  || "";
     _getGmapsURL = () => _get("place.url")(this.state) || _get("value.gmapsURL")(this.props) || "";
     _getChooseCityText = () => this.props.chooseCityText || Config.CHOOSE_CITY_TEXT;
+    _getFallbackCityText = () => this.props.fallbackCityText || Config.FALLBACK_CITY_TEXT;
 
     /**
      * Render a Select to let the user choose current place.
@@ -164,6 +188,12 @@ class Geolocation extends React.Component {
         </Tooltip>
     );
 
+    renderFallbackText = () => (
+        <div className="geolocation__fallback-text">
+            { this._getFallbackCityText() }
+        </div>
+    );
+
     render = () => (
         <div className="geolocation">
             <div className={"related-body form-group "+(this.props.error?"error":"")}>
@@ -176,6 +206,7 @@ class Geolocation extends React.Component {
                                disabled={this.props.disabled}
                                className={this.props.className}
                                placeholder={this.props.placeholder}/>
+                        { this.state.showFallbackText ? this.renderFallbackText() : null }
                     </div>
                 </div>
                 { !this.state.hideChooseSelect && this.state.nearestLocalities.length > 1 ? this.renderChooseSelect() : null }
@@ -191,6 +222,7 @@ Geolocation.propTypes = {
     onChange : PropTypes.func,
     placeholder: PropTypes.string,
     chooseCityText: PropTypes.string,
+    fallbackCityText: PropTypes.string,
     disabled: PropTypes.bool,
     className: PropTypes.string,
     language: PropTypes.string,

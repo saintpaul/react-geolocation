@@ -2,6 +2,7 @@ $geolocation-margin: 0 0 14px 0 !default;
 $geolocation-refine-box-margin: 24px 0 !default;
 $geolocation-refine-box-bg-color: grey !default;
 $geolocation-refine-box-text-color: white !default;
+$geolocation-fallback-text-font-size: 11px;
 
 // Media queries
 $small-screen: 768px !default;
@@ -25,6 +26,10 @@ $small: "only screen and (min-width: #{$small-screen})" !default;
       width: 50%;
     }
   }
+}
+
+.geolocation__fallback-text {
+  font-size: $geolocation-fallback-text-font-size;
 }
 
 .geolocation__refine-box.fixed-tooltip {

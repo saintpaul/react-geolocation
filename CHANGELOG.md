@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.3.0
+- Fallback to 'Luxemburg city' if user select an entry that is not matching any valid locality (ex: 'Luxemburg')
+
 ## 1.2.0
 - Fix version of 'event-stream' to 3.3.4 to avoid security issues
 
