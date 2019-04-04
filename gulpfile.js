@@ -1,21 +1,20 @@
 var connect             = require('gulp-connect'),
     del                 = require('del'),
-    gulp                = require('gulp'),
-    runSequence         = require('run-sequence');
+    gulp                = require('gulp')
 
 require('./gulp/lint');
 require('./gulp/sass');
 require('./gulp/browserify');
 
-gulp.task('clean', function (cb) {
-    del(['./demo/build/*'], cb);
+gulp.task('clean', function () {
+    return del(['./demo/build/*']);
 });
 
-gulp.task('clean-test', function (cb) {
-    del(['./test/app/js/*'], cb);
+gulp.task('clean-test', function () {
+    return del(['./test/app/js/*']);
 });
 
-gulp.task('serve', function() {
+gulp.task('serve', function(done) {
 
     connect.server({
         port: 9999,
@@ -25,34 +24,32 @@ gulp.task('serve', function() {
         }
     });
 
+    done()
+
 });
 
-gulp.task('fonts',  function(cb){
+gulp.task('fonts',  function(done){
     gulp.src('./src/fonts/**/*.{eot,svg,ttf,woff,woff2}')
         .pipe(gulp.dest('./demo/build/fonts/'));
-    cb();
+
+    done();
 });
 
-gulp.task('html', function(){
+gulp.task('html', function(done){
     gulp.src('./demo/index.html')
         .pipe(gulp.dest('./demo/build/'))
         .pipe(connect.reload());
+
+    done();
 });
 
-gulp.task('watch', ['watchify'], function(cb) {
-    gulp.watch(['./src/js/**/*.js', './src/js/**/*.jsx'], ['lint-dev']);
-    gulp.watch(['./src/css/**/*.scss'], ['sass-dev']);
-    gulp.watch('./demo/index.html', ['html']);
-    cb();
-});
+gulp.task('watch', gulp.series('watchify', function(done) {
+    gulp.watch(['./src/js/**/*.js', './src/js/**/*.jsx'], gulp.series('lint-dev'));
+    gulp.watch(['./src/css/**/*.scss'], gulp.series('sass-dev'));
+    gulp.watch('./demo/index.html', gulp.series('html'));
+    done();
+}));
 
-gulp.task('default', function(cb){
-    runSequence(
-        'clean',
-        'lint-dev',
-        ['sass-dev', 'html', 'fonts'],
-        'watch',
-        'serve',
-        cb
-    );
-});
+gulp.task('default', gulp.series('clean', 'lint-dev', gulp.parallel('sass-dev', 'html', 'fonts'), 'watch', 'serve', function(done) {
+    done();
+}));

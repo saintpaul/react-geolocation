@@ -14,10 +14,14 @@ var lintTask = function(exit) {
         .on('error', exitProcess(exit));
 };
 
-gulp.task('lint', function () {
-    return lintTask(true);
+gulp.task('lint', function (done) {
+    lintTask(true);
+
+    done();
 });
 
-gulp.task('lint-dev', function () {
-    return lintTask(false);
+gulp.task('lint-dev', function (done) {
+    lintTask(false);
+
+    done();
 });

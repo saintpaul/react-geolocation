@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.5.0
+- Support Node 10
+- Upgrade to Gulp 4
+
 ## 1.4.0
 - Update release script
 

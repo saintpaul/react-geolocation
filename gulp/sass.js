@@ -29,16 +29,18 @@ var sassTask = function(exit, options) {
         .pipe(connect.reload());
 };
 
-gulp.task('sass', function () {
+gulp.task('sass', function (done) {
     sassTask(true, {
         compress: true,
         sourceMaps: false
     });
+    done();
 });
 
-gulp.task('sass-dev', function () {
+gulp.task('sass-dev', function (done) {
     sassTask(false, {
         compress: false,
         sourceMaps: true
     });
+    done();
 });
