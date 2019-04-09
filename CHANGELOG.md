@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.5.1
+- Update release script : no need to pass a "v" before version number when releasing
+
 ## 1.5.0
 - Support Node 10
 - Upgrade to Gulp 4
