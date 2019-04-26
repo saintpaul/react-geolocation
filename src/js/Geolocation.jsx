@@ -106,7 +106,7 @@ class Geolocation extends React.Component {
             let userInput = this.autocompleteRef.value;
             let placeLocation = place.geometry.location;
             let placeName =  _flow(
-                _find( (comp) => _find( (typ) => typ === "locality")(comp.types) ),
+                _find( (comp) => _find( (typ) => typ === "locality" || typ === "sublocality")(comp.types) ),
                 _get("short_name")
             )(place.address_components);
 

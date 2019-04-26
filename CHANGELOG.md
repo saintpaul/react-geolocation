@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.5.2
+- Do not fallback to Luxemburg city for "sublocalities"
+
 ## 1.5.1
 - Update release script : no need to pass a "v" before version number when releasing
 
