@@ -68,6 +68,7 @@
     "react-bootstrap": "~0.30.1",
     "react-dom": "16.x",
     "react-select": "1.0.0",
+    "tar": "4.4.2",
     "vinyl-source-stream": "2.0.0",
     "watchify": "3.11.1"
   },

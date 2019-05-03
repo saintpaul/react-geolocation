@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.5.3
+- Upgrade "tar" dev dependency because of a vulnerability 
+
 ## 1.5.2
 - Do not fallback to Luxemburg city for "sublocalities"
 
